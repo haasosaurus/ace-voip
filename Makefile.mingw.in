@@ -1,0 +1,75 @@
+#
+#  Ettercap NG Makefile for MingW32
+#  by G. Vanem <giva@bgnett.no>
+#
+
+.SUFFIXES: .exe .dll
+
+VERSION = @VERSION@
+
+#
+# Choose your weapons
+#
+USE_SSL    = 0
+USE_PLUGIN = 0
+USE_GTK    = 0
+USE_CURSES = 0
+USE_DEBUG  = 1
+
+#
+# Root directories. Change to suite.
+#
+# These are required:
+#   PCAP_ROOT, LIBNET_ROOT, PTHREADS_ROOT, ICONV_ROOT, REGEX_ROOT and ZLIB_ROOT.
+#
+# These are required for GTK (and GTK is required since the Ncurses/Win32
+# port isn't finished):
+#   GTK_ROOT, PANGO_ROOT, ATK_ROOT and GLIB_ROOT.
+#
+# The rest are optional depending on what USE_x you've set above.
+#
+# If USE_CURSES=1, we need Ncurses with PD-curses at bottom.
+# Missing packages should not matter unless USE_x requires them.
+#
+
+PCAP_ROOT     = ../../winpcap
+
+PROGRAMS = ace.exe
+
+CC = gcc
+
+EX_LIBS = -lws2_32
+
+# winpcap
+PCAP_LIB = -I$(PCAP_ROOT)/Include -DPCAP_NO_INLINES
+EX_LIBS += $(PCAP_ROOT)/lib/libwpcap.a $(PCAP_ROOT)/lib/libpacket.a
+EX_LIBS += Libnet.dll
+EX_LIBS += -liphlpapi -ldhcpcsvc
+
+
+all: $(PROGRAMS)
+	@echo "Welcome to ACE"
+
+ace.exe: main.o cdp.o tftp_client.o voiphop.o http_packet.o http_handler.o directory_parser.o xml_config_parser.o
+	$(CC) main.o cdp.o tftp_client.o voiphop.o http_packet.o http_handler.o directory_parser.o xml_config_parser.o -o $(PROGRAMS) $(EX_LIBS) 
+
+main.o: main.c
+	$(CC) -c main.c -I ../../winpcap/Include
+tftp_client.o: tftp_client.c
+	$(CC) -c tftp_client.c -I ../../winpcap/Include
+cdp.o: cdp.c
+	$(CC) -c cdp.c -I ../../libnet/include/ -I ../../libnet/include/win32/ -I ../../winpcap/Include/
+voiphop.o: voiphop.c
+	$(CC) -c voiphop.c -I ../../winpcap/Include
+http_packet.o: http_packet.c
+	$(CC) -c http_packet.c -I ../../winpcap/Include
+http_handler.o: http_handler.c 
+	$(CC) -c http_handler.c -I ../../winpcap/Include
+directory_parser.o: directory_parser.c
+	$(CC) -c directory_parser.c -I ../../winpcap/Include
+xml_config_parser.o: xml_config_parser.c
+	$(CC) -c xml_config_parser.c -I ../../winpcap/Include
+
+clean:
+	rm *.o
+	rm $(PROGRAMS)
