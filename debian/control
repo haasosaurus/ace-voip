@@ -1,0 +1,15 @@
+Source: ace
+Section: unknown
+Priority: extra
+Maintainer: dookie <dookie@kali.localdomain>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: <insert the upstream URL, if relevant>
+#Vcs-Git: git://git.debian.org/collab-maint/ace.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/ace.git;a=summary
+
+Package: ace
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>
