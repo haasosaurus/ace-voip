@@ -1,15 +1,30 @@
 Source: ace
-Section: unknown
+Section: net
 Priority: extra
-Maintainer: dookie <dookie@kali.localdomain>
+Maintainer: dookie <dookie@kali.org>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.3
-Homepage: <insert the upstream URL, if relevant>
-#Vcs-Git: git://git.debian.org/collab-maint/ace.git
-#Vcs-Browser: http://git.debian.org/?p=collab-maint/ace.git;a=summary
+Homepage: http://ucsniff.sourceforge.net/ace.html
+Vcs-Git: ssh://git@git.kali.org/packages/ace.git
+Vcs-Browser: http://git.kali.org/gitweb/?p=packages/ace.git;a=summary
 
 Package: ace
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Description: A simple VoIP corporate directory enumeration tool
+ ACE (Automated Corporate Enumerator) is a simple yet powerful 
+ VoIP Corporate Directory enumeration tool that mimics the behavior 
+ of an IP Phone in order to download the name and extension entries 
+ that a given phone can display on its screen interface. In the 
+ same way that the "corporate directory" feature of VoIP hardphones 
+ enables users to easily dial by name via their VoIP handsets, ACE 
+ was developed as a research idea born from "VoIP Hopper" to 
+ automate VoIP attacks that can be targeted against names in an 
+ enterprise Directory. The concept is that in the future, attacks 
+ will be carried out against users based on their name, rather than 
+ targeting VoIP traffic against random RTP audio streams or IP 
+ addresses. ACE works by using DHCP, TFTP, and HTTP in order to 
+ download the VoIP corporate directory. It then outputs the 
+ directory to a text file, which can be used as input to other 
+ VoIP assessment tools. 
+
