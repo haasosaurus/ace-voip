@@ -2,7 +2,7 @@ Source: ace
 Section: net
 Priority: extra
 Maintainer: dookie <dookie@kali.org>
-Build-Depends: debhelper (>= 8.0.0)
+Build-Depends: debhelper (>= 8.0.0), libpcap-dev
 Standards-Version: 3.9.3
 Homepage: http://ucsniff.sourceforge.net/ace.html
 Vcs-Git: ssh://git@git.kali.org/packages/ace.git
@@ -10,7 +10,7 @@ Vcs-Browser: http://git.kali.org/gitweb/?p=packages/ace.git;a=summary
 
 Package: ace
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, libpcap0.8
 Description: A simple VoIP corporate directory enumeration tool
  ACE (Automated Corporate Enumerator) is a simple yet powerful 
  VoIP Corporate Directory enumeration tool that mimics the behavior 
