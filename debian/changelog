@@ -1,3 +1,9 @@
+ace (1.10-1kali2) kali; urgency=low
+
+  * Fixed build
+
+ -- dookie <dookie@kali.org>  Thu, 08 Nov 2012 15:23:48 -0700
+
 ace (1.10-1kali1) kali; urgency=low
 
   * Kali Version
