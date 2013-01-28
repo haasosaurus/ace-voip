@@ -1,2 +1,2 @@
 debian/*.desktop usr/share/applications/
-ace /usr/bin/
+ace usr/bin/
