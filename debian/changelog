@@ -1,3 +1,10 @@
+ace-voip (1.10-1kali4) kali; urgency=low
+
+  * Add debian/patches/fix-for-newer-kernel to work around the removal
+    of if_tr.h since Linux 3.5.
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Fri, 01 Feb 2013 16:07:52 +0100
+
 ace-voip (1.10-1kali3) kali; urgency=low
 
   * Rename the source package and the binary package to avoid a clash with

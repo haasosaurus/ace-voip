@@ -1,0 +1,50 @@
+--- a/client.h
++++ b/client.h
+@@ -26,8 +26,45 @@
+ #ifdef __GLIBC__
+ #include <net/ethernet.h>
+ #include <linux/types.h>
+-#include <linux/if_tr.h>
+-#else
++
++/* linux/if_tr.h got removed, hardcode the required bits for now */
++#include <asm/byteorder.h>      /* For __be16 */
++#define TR_ALEN         6               /* Octets in one token-ring addr */
++#define AC              0x10
++#define LLC_FRAME       0x40
++
++/* LLC and SNAP constants */
++#define EXTENDED_SAP    0xAA
++#define UI_CMD          0x03
++
++/* This is an Token-Ring frame header. */
++struct trh_hdr {
++        __u8  ac;                       /* access control field */
++        __u8  fc;                       /* frame control field */
++        __u8  daddr[TR_ALEN];           /* destination address */
++        __u8  saddr[TR_ALEN];           /* source address */
++        __be16 rcf;                     /* route control field */
++        __be16 rseg[8];                 /* routing registers */
++};
++/* This is an Token-Ring LLC structure */
++struct trllc {
++        __u8  dsap;                     /* destination SAP */
++        __u8  ssap;                     /* source SAP */
++        __u8  llc;                      /* LLC control field */
++        __u8  protid[3];                /* protocol id */
++        __be16 ethertype;               /* ether type field */
++};
++/* source routing stuff */
++#define TR_RII                  0x80
++#define TR_RCF_DIR_BIT          0x80
++#define TR_RCF_LEN_MASK         0x1f00
++#define TR_RCF_BROADCAST        0x8000  /* all-routes broadcast */
++#define TR_RCF_LIMITED_BROADCAST 0xC000 /* single-route broadcast */
++#define TR_RCF_FRAME2K          0x20
++#define TR_RCF_BROADCAST_MASK   0xC000
++#define TR_MAXRIFLEN            18
++
++#else /* __GLIBC__ */
+ #include <linux/if_ether.h>
+ #define ETHERTYPE_IP		0x0800
+ #define ETHERTYPE_ARP		0x0806
